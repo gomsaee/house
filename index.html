@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div>
+        <span class="logo" style="font-size: 20px; font-weight: bold"
+          >JS-SHOP</span
+        >
+      </div>
+      <div>
+        <span>SERVICES</span>
+        <span>PORTFOLIO</span>
+        <span>ABOUT</span>
+      </div>
+    </nav>
+    <div class="body">
+      <div class="alert-box" id="alert">
+        <p id="title">아이디를 입력하세요</p>
+        <button id="close">닫기</button>
+      </div>
+
+      <button onclick="idAlert('아이디입력해주세요')" ;>버튼1</button>
+      <button onclick="idAlert('비밀번호입력해주세요')" ;>버튼2</button>
+      <div class="list_box">
+        <li class="title_list">
+          <span>Navbar</span> <span><i class="fas fa-bars"></i></span>
+        </li>
+        <div class="list">
+          <li>An item</li>
+          <li>A second item</li>
+          <li>A third item</li>
+          <li>A fourth item</li>
+          <li>And a fifth one</li>
+        </div>
+      </div>
+      <button class="click-box">로그인</button>
+      <div class="black-bg">
+        <div class="white-bg">
+          <h4>로그인하세요</h4>
+          <form action="success.html">
+            <div class="my-3">
+              <input type="text" class="form-control" id="email" />
+            </div>
+            <div class="my-3">
+              <input type="password" class="form-control" id="password" />
+            </div>
+            <button type="submit" class="btn btn-primary">전송</button>
+            <button type="button" class="btn btn-danger" id="close">
+              닫기
+            </button>
+          </form>
+        </div>
+      </div>
+      <div style="height: 1000px"></div>
+      <div
+        class="lorem"
+        style="
+          width: 200px;
+          height: 100px;
+          overflow-y: scroll;
+          border: 1px solid black;
+        "
+      >
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas
+        voluptatum minus praesentium fugit debitis at, laborum ipsa itaque
+        placeat sit, excepturi eius. Nostrum perspiciatis, eligendi quae
+        consectetur praesentium exercitationem.
+      </div>
+      <div class="main-bg">
+        <h4>Shirts on Sale</h4>
+        <button id="login" class="btn btn-danger">로그인</button>
+      </div>
+      <span class="badge bg-dark">Dark 🔄</span>
+    </div>
+
+    <p>태초 이성계가 태어난 년도는?</p>
+    <input type="text" id="answer" />
+    <button id="send-answer">제출</button>
+
+    <div class="alert alert-danger">
+      <span id="num">5</span>초이내 구매시 사은품 증정!
+    </div>
+    <div class="container-box" style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="car1 .png" />
+        </div>
+        <div class="slide-box">
+          <img src="car2.png" />
+        </div>
+        <div class="slide-box">
+          <img src="car3.png" />
+        </div>
+      </div>
+    </div>
+    <button class="slide-left">이전</button>
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="slide-right">다음</button>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function idAlert(A) {
+        document.getElementById("title").innerHTML = A;
+        document.getElementById("alert").style.display = "block";
+      }
+
+      document.getElementById("close").addEventListener("click", function () {
+        document.getElementById("alert").style.display = "none";
+      });
+
+      document.querySelector(".fas ").addEventListener("click", function () {
+        document.querySelector(".list").classList.toggle("show");
+      });
+
+      document
+        .querySelectorAll(".click-box")[0]
+        .addEventListener("click", function () {
+          document
+            .querySelectorAll(".black-bg")[0]
+            .classList.toggle("show-box");
+        });
+      document
+        .querySelectorAll(".click-box")[0]
+        .addEventListener("click", function () {
+          document
+            .querySelectorAll(".black-bg")[0]
+            .classList.toggle("show-modal");
+        });
+
+      document.querySelector(".btn").addEventListener("click", function () {
+        document.querySelector(".black-bg").classList.remove("show-modal");
+      });
+
+      document
+        .querySelectorAll(".btn-primary")[0]
+        .addEventListener("click", function (e) {
+          if (
+            /[A-Z]/.test(document.querySelector("#password").value) == false
+          ) {
+            e.preventDefault();
+            alert("대문자도 넣어주세요");
+          } else if (document.querySelector("#email").value == "") {
+            e.preventDefault();
+            alert("아이디 입력하세요요용ㅅㅂ");
+          } else if (document.querySelector("#password").value == "") {
+            e.preventDefault();
+            alert("비밀번호도 입력하세요");
+          } else if (document.querySelector("#password").value.length <= 6) {
+            e.preventDefault();
+            alert("비밀번호 더길게 입력해라잉");
+          }
+        });
+
+      function 삼육구게임(num) {
+        if (num % 10 === 3 || num % 10 === 6 || num % 10 === 9) {
+          console.log("박수");
+        } else {
+          console.log("통과");
+        }
+      }
+
+      function 합격했냐(개론, 민법) {
+        if (개론 < 40 || 민법 < 40) {
+          console.log("불합격");
+        } else if (개론 + 민법 >= 120) {
+          console.log("통과");
+        } else {
+          console.log("불합격");
+        }
+        if (개론 > 100 || 민법 > 100) {
+          alert("장난치지마라잉");
+        }
+      }
+
+      var count = 0;
+      document.querySelector(".badge").addEventListener("click", function () {
+        count = count + 1;
+        if (count % 2 === 1) {
+          document.querySelector(".body").style.color = "white";
+        } else if (count % 2 === 0) {
+          document.querySelector(".body").style.color = "black";
+        }
+      });
+
+      function 예금액계산(A) {
+        if (A >= 50000) {
+          console.log(A * 1.2 * 1.2);
+        } else {
+          console.log(A * 1.15 * 1.15);
+        }
+      }
+
+      var 예금액 = 10000;
+      var 미래예금액 = 0;
+
+      if (예금액 >= 50000) {
+        미래예금액 = 예금액 * 1.2 * 1.2;
+      } else {
+        미래예금액 = 예금액 * 1.15 * 1.15;
+      }
+      console.log(미래예금액);
+
+      var first = 360;
+      var coffee = 0;
+      coffee = first + (first * 2) / 3 + (((first * 2) / 3) * 2) / 3;
+      console.log(coffee);
+
+      var count = 0;
+      document
+        .querySelector("#send-answer")
+        .addEventListener("click", function () {
+          count = count + 1;
+          if (document.querySelector("#answer").value == "1335") {
+            alert("성공");
+          } else if (
+            document.querySelector("#answer").value != "1335" &&
+            count >= 3
+          ) {
+            alert("멍청아");
+          }
+        });
+
+      var 타임아웃 = 5;
+      setInterval(function () {
+        타임아웃 = 타임아웃 - 1;
+
+        if (1 <= 타임아웃 && 타임아웃 <= 5) {
+          document.querySelector("#num").innerHTML = 타임아웃;
+        }
+        if (타임아웃 === 0) {
+          document.querySelector(".alert").style.display = "none";
+        }
+      }, 1000);
+
+      function 버튼누르면바뀌기(A) {
+        document.querySelector(".slide-container").style.transform = A;
+      }
+
+      document
+        .querySelector(".slide-2")
+        .addEventListener("click", () =>
+          버튼누르면바뀌기("translateX(-100vw)")
+        );
+      document
+        .querySelector(".slide-1")
+        .addEventListener("click", () => 버튼누르면바뀌기("translateX(0vw)"));
+      document
+        .querySelector(".slide-3")
+        .addEventListener("click", () =>
+          버튼누르면바뀌기("translateX(-200vw)")
+        );
+
+      let 다음버튼 = 0;
+      let 위치이동 = 0;
+
+      document.querySelector(".slide-right").addEventListener("click", () => {
+        if (다음버튼 < 2) {
+          다음버튼 = 다음버튼 + 1;
+          위치이동 = 위치이동 - 100;
+        }
+
+        if (다음버튼 >= 1) {
+          document.querySelector(
+            ".slide-container"
+          ).style.transform = `translateX(${위치이동}vw)`;
+        }
+      });
+      document.querySelector(".slide-left").addEventListener("click", () => {
+        다음버튼 = 다음버튼 + 1;
+        위치이동 = 위치이동 + 100;
+        if (다음버튼 >= 1) {
+          document.querySelector(
+            ".slide-container"
+          ).style.transform = `translateX(${위치이동}vw)`;
+        }
+      });
+
+      window.addEventListener("scroll", function () {
+        if (window.scrollY > 100) {
+          document.querySelector(".logo").style.fontSize = "30px";
+        } else {
+          document.querySelector(".logo").style.fontSize = "20px";
+        }
+      });
+
+      var 스크롤양 = document.querySelector(".lorem").scrollTop;
+      var 실제높이 = document.querySelector(".lorem").scrollHeight;
+      var 높이 = document.querySelector(".lorem").clientHeight;
+      document.querySelector(".lorem").addEventListener("scroll", function () {
+        if (스크롤양 + 높이 > 실제높이 - 10) {
+          alert("다읽음");
+        }
+      });
+      document
+        .querySelector(".black-bg")
+        .addEventListener("click", function (e) {
+          document.querySelector(".black-bg").classList.remove("show-modal");
+        });
+    </script>
+  </body>
+</html>

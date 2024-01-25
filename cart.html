@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h5 class="btn">장바구니</h5>
+    <div class="list"></div>
+    <script>
+      JSON.parse(localStorage.getItem("cart"));
+      if (localStorage.getItem("cart") != null) {
+        for (let i = 0; i < localStorage.getItem("cart").length; i++) {
+          document.querySelector(".list").innerHTML =
+            localStorage.getItem("cart");
+        }
+      }
+    </script>
+  </body>
+</html>
