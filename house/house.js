@@ -4,6 +4,7 @@ fetch("store.json")
   .then(function (data) {
     test = data;
     let priceArray = [];
+    let totalPrice = 0;
     for (let i = 0; i < test.products.length; i++) {
       var 템플릿 = `
         <div class="product-card" id='num${i}' draggable = 'true'>
@@ -50,9 +51,6 @@ fetch("store.json")
       //드래그 요소가 두번째 박스에 계속 위치하면 발생하는 이벤트
     });
 
-    let price;
-    let inputValue;
-
     cart.addEventListener("drop", (e) => {
       let flag = false;
       e.preventDefault();
@@ -60,15 +58,23 @@ fetch("store.json")
       if (cart.querySelector(".product-card") === null) {
         cart.innerHTML = "";
       }
-
       for (let i = 0; i < cart.children.length; i++) {
         if (cart.children[i].id === targetDrag.id) {
           flag = true;
         }
       }
       if (flag === true) {
-        cart.lastElementChild.lastElementChild.value++;
-        priceArray.push(price * inputValue);
+        totalPrice = 0;
+        cart.querySelector(`#${targetDrag.id}`).lastElementChild.value++;
+
+        for (let i = 0; i < cart.children.length; i++) {
+          totalPrice +=
+            cart.querySelector(`#num${i}`).lastElementChild.value *
+            cart.querySelector(`#num${i}`).lastElementChild
+              .previousElementSibling.innerHTML;
+        }
+
+        document.querySelector(".price").innerHTML = totalPrice;
       } else {
         let input = document.createElement("input");
         cart.append(targetDrag);
@@ -76,22 +82,14 @@ fetch("store.json")
         targetDrag.appendChild(input);
         targetDrag.lastElementChild.value = 1;
 
-        // 최종가격 나타내기
+        let price = cart.querySelector(`#${targetDrag.id}`).lastElementChild
+          .previousElementSibling.innerHTML;
+        let inputValue = cart.querySelector(`#${targetDrag.id}`)
+          .lastElementChild.value;
 
-        for (let i = 0; i < cart.children.length; i++) {
-          price = cart.querySelector(`#num${i}`).lastElementChild
-            .previousElementSibling.innerHTML;
-          inputValue = cart.querySelector(`#num${i}`).lastElementChild.value;
-        }
+        totalPrice += price * inputValue;
 
-        priceArray.push(price * inputValue);
-
-        let result = 0;
-        for (let i = 0; i < priceArray.length; i++) {
-          result += priceArray[i];
-        }
-
-        document.querySelector(".price").innerHTML = result;
+        document.querySelector(".price").innerHTML = totalPrice;
       }
     });
     //담기버튼
