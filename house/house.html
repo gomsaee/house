@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="house.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <nav class="nav-container">
+        <div style="font-size: 18px; margin-left: 5px">집꾸미기</div>
+        <div>home</div>
+        <div>스토어</div>
+        <div>시공견적</div>
+      </nav>
+    </header>
+    <main>
+      <form class="search-form">
+        <input type="text" class="search" placeholder="검색어입력" />
+      </form>
+      <article class="article-container"></article>
+      <article class="article-cart">
+        <h3>장바구니</h3>
+        <div
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <div class="cart">여기로드래그</div>
+        </div>
+        <div class="article-price">
+          <div>최종 가격</div>
+          <div style="display: flex; gap: 10px; font-weight: lighter">
+            <div>합계</div>
+            <div class="price"></div>
+          </div>
+          <div><button class="buy-button">구매하기</button></div>
+        </div>
+
+        <div class="order-box">
+          <div class="order">성함</div>
+          <input />
+          <div class="order">연락처</div>
+          <input />
+          <div class="button-box">
+            <button class="buy-success">입력완료</button>
+            <button class="buy-close">닫기</button>
+          </div>
+        </div>
+        <canvas id="canvas" width="350" height="350"></canvas>
+      </article>
+    </main>
+    <script src="house.js"></script>
+  </body>
+</html>
