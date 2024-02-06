@@ -3,12 +3,12 @@ fetch("store.json")
   .then((res) => res.json())
   .then(function (data) {
     test = data;
-    let priceArray = [];
+    let totalPrice = 0;
     for (let i = 0; i < test.products.length; i++) {
       var 템플릿 = `
         <div class="product-card" id='num${i}' draggable = 'true'>
           <img src="pr${[i]}.JPG" />
-          <h5>${test.products[i].title}</h5>
+          <h5 class = 'title'>${test.products[i].title}</h5>
           <p>${test.products[i].brand}</p>
           <p> ${test.products[i].price}</p>
           <button class='add-btn'>담기</button>
@@ -50,9 +50,6 @@ fetch("store.json")
       //드래그 요소가 두번째 박스에 계속 위치하면 발생하는 이벤트
     });
 
-    let price;
-    let inputValue;
-
     cart.addEventListener("drop", (e) => {
       let flag = false;
       e.preventDefault();
@@ -60,15 +57,22 @@ fetch("store.json")
       if (cart.querySelector(".product-card") === null) {
         cart.innerHTML = "";
       }
-
       for (let i = 0; i < cart.children.length; i++) {
         if (cart.children[i].id === targetDrag.id) {
           flag = true;
         }
       }
       if (flag === true) {
-        cart.lastElementChild.lastElementChild.value++;
-        priceArray.push(price * inputValue);
+        totalPrice = 0;
+        cart.querySelector(`#${targetDrag.id}`).lastElementChild.value++;
+
+        for (let i = 0; i < cart.children.length; i++) {
+          totalPrice +=
+            cart.children[i].lastElementChild.value *
+            cart.children[i].lastElementChild.previousElementSibling.innerHTML;
+        }
+
+        document.querySelector(".price").innerHTML = totalPrice;
       } else {
         let input = document.createElement("input");
         cart.append(targetDrag);
@@ -76,22 +80,14 @@ fetch("store.json")
         targetDrag.appendChild(input);
         targetDrag.lastElementChild.value = 1;
 
-        // 최종가격 나타내기
+        let price = cart.querySelector(`#${targetDrag.id}`).lastElementChild
+          .previousElementSibling.innerHTML;
+        let inputValue = cart.querySelector(`#${targetDrag.id}`)
+          .lastElementChild.value;
 
-        for (let i = 0; i < cart.children.length; i++) {
-          price = cart.querySelector(`#num${i}`).lastElementChild
-            .previousElementSibling.innerHTML;
-          inputValue = cart.querySelector(`#num${i}`).lastElementChild.value;
-        }
+        totalPrice += price * inputValue;
 
-        priceArray.push(price * inputValue);
-
-        let result = 0;
-        for (let i = 0; i < priceArray.length; i++) {
-          result += priceArray[i];
-        }
-
-        document.querySelector(".price").innerHTML = result;
+        document.querySelector(".price").innerHTML = totalPrice;
       }
     });
     //담기버튼
@@ -112,12 +108,31 @@ fetch("store.json")
           }
         }
         if (flag === true) {
-          cart.lastElementChild.lastElementChild.value++;
+          totalPrice = 0;
+          cart.querySelector(`#${targetDrag.id}`).lastElementChild.value++;
+
+          for (let i = 0; i < cart.children.length; i++) {
+            totalPrice +=
+              cart.children[i].lastElementChild.value *
+              cart.children[i].lastElementChild.previousElementSibling
+                .innerHTML;
+          }
+
+          document.querySelector(".price").innerHTML = totalPrice;
         } else {
           cart.append(targetDrag);
           targetDrag.querySelector(".add-btn").remove();
           targetDrag.appendChild(input);
           targetDrag.lastElementChild.value = 1;
+
+          let price = cart.querySelector(`#${targetDrag.id}`).lastElementChild
+            .previousElementSibling.innerHTML;
+          let inputValue = cart.querySelector(`#${targetDrag.id}`)
+            .lastElementChild.value;
+
+          totalPrice += price * inputValue;
+
+          document.querySelector(".price").innerHTML = totalPrice;
         }
       });
     }
@@ -159,3 +174,36 @@ function fn(e) {
 }
 
 document.querySelector(".search-form").addEventListener("submit", fn);
+
+document.querySelector(".buy-button").addEventListener("click", () => {
+  document.querySelector(".order-box").style.display = "block";
+});
+document.querySelector(".buy-close").addEventListener("click", () => {
+  document.querySelector(".order-box").style.display = "none";
+});
+
+document.querySelector(".buy-success").addEventListener("click", () => {
+  document.querySelector("#canvas").style.display = "block";
+  document.querySelector(".order-box").style.display = "none";
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  const now = new Date();
+  c.font = "10px dotum";
+
+  let h5 = [];
+  for (let i = 0; i < document.querySelector(".cart").children.length; i++) {
+    h5.push(
+      document.querySelector(".cart").children[i].lastElementChild
+        .previousElementSibling.previousElementSibling.previousElementSibling
+        .innerHTML
+    );
+  }
+
+  c.fillText("영수증", 30, 50);
+  c.fillText("현재날짜", 30, 80);
+  c.fillText(now.toLocaleString("ko-KR"), 30, 100);
+  c.fillText("구매목록", 30, 120);
+  c.fillText(h5, 30, 140);
+  c.fillText("총 합계", 30, 250);
+  c.fillText(document.querySelector(".price").innerHTML, 30, 280);
+});
