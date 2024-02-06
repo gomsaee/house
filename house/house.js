@@ -188,7 +188,6 @@ document.querySelector(".buy-success").addEventListener("click", () => {
   var canvas = document.getElementById("canvas");
   var c = canvas.getContext("2d");
   const now = new Date();
-  c.font = "10px dotum";
 
   let h5 = [];
   for (let i = 0; i < document.querySelector(".cart").children.length; i++) {
