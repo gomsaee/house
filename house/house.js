@@ -5,7 +5,7 @@ fetch("store.json")
     test = data;
     let totalPrice = 0;
     for (let i = 0; i < test.products.length; i++) {
-      var 템플릿 = `
+      let 템플릿 = `
         <div class="product-card" id='num${i}' draggable = 'true'>
           <img src="pr${[i]}.JPG" />
           <h5 class = 'title'>${test.products[i].title}</h5>
@@ -142,7 +142,7 @@ fetch("store.json")
 function fn(e) {
   e.preventDefault();
   document.querySelector(".article-container").innerHTML = "";
-  var inputValue = document.querySelector(".search").value;
+  let inputValue = document.querySelector(".search").value;
   for (let i = 0; i < test.products.length; i++) {
     if (
       test.products[i].title.includes(inputValue) ||
@@ -185,8 +185,8 @@ document.querySelector(".buy-close").addEventListener("click", () => {
 document.querySelector(".buy-success").addEventListener("click", () => {
   document.querySelector("#canvas").style.display = "block";
   document.querySelector(".order-box").style.display = "none";
-  var canvas = document.getElementById("canvas");
-  var c = canvas.getContext("2d");
+  let canvas = document.getElementById("canvas");
+  let c = canvas.getContext("2d");
   const now = new Date();
 
   let h5 = [];
