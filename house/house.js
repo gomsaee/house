@@ -1,6 +1,6 @@
 const dragCard = document.querySelector(".article-container");
 let test;
-fetch("/house/store.json")
+fetch("./store.json")
   .then((res) => res.json())
   .then(function (data) {
     test = data;
@@ -8,7 +8,7 @@ fetch("/house/store.json")
     for (let i = 0; i < test.products.length; i++) {
       let template = `
         <div class="product-card" id='num${i}' draggable = 'true'>
-          <img src="/house/pr${[i]}.JPG" />
+          <img src="./pr${[i]}.JPG" />
           <h5 class = 'title'>${test.products[i].title}</h5>
           <p>${test.products[i].brand}</p>
           <p> ${test.products[i].price}</p>
@@ -111,7 +111,7 @@ function titleYellow(e) {
     ) {
       let template = `
 <div class="product-card" draggable = 'true'>
-<img src="/house/pr${[i]}.JPG" />
+<img src="./pr${[i]}.JPG" />
       <h5 class='title-yellow'>${test.products[i].title}<h5>
       <p class='brand-yellow'>${test.products[i].brand}</p>
       <p> 가격 : ${test.products[i].price}</p>
