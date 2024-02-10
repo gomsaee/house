@@ -1,6 +1,6 @@
 const dragCard = document.querySelector(".article-container");
 let test;
-fetch("store.json")
+fetch("/house/store.json")
   .then((res) => res.json())
   .then(function (data) {
     test = data;
